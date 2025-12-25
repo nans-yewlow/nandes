@@ -8,20 +8,31 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <div class="qr-container" style="text-align: center; margin-top: 20px">
+    <p class="qr-subtitle" style="font-size: 14px; color: gray">BANK ARTHESA</p>
 
-  <div class="qr-container" style="text-align:center; margin-top: 20px;">
+    <h2 class="qr-name" style="margin: 8px 0">BANK ARTHESA</h2>
+    <p class="qr-account" style="margin: 0 0 10px">0822 9834 8383</p>
 
-    <p class="qr-subtitle" style="font-size:14px; color:gray;">BANK ARTHESA</p>
+    <!-- QR CODE DARI ASSETS & KAMERA -->
+    <div class="qr-box" style="text-align: center; margin-top: 20px">
+      <!-- Gambar QR Static -->
+      <img src="assets/img/qr.png" width="220" *ngIf="!scanning" />
 
-    <h2 class="qr-name" style="margin:8px 0;">BANK ARTHESA</h2>
-    <p class="qr-account" style="margin:0 0 10px;">0822 9834 8383</p>
+      <!-- Tampilan Kamera -->
+      <video
+        #video
+        autoplay
+        playsinline
+        style="width: 220px; height: 220px; object-fit: cover"
+        *ngIf="scanning"
+      ></video>
 
-    <!-- QR CODE DARI ASSETS -->
-    <div class="qr-box" style="text-align:center; margin-top:20px;">
-      <img src="assets/img/qr.png" width="220" />
+      <!-- Canvas Tersembunyi untuk Processing -->
+      <canvas #canvas hidden></canvas>
     </div>
 
-    <p class="qr-desc" style="font-size:14px; color:#777; margin-top:12px;">
+    <p class="qr-desc" style="font-size: 14px; color: #777; margin-top: 12px">
       Ajak teman untuk scan kode QR ini
     </p>
 
@@ -29,12 +40,10 @@
     <ion-button
       expand="block"
       color="primary"
-      style="margin-top:20px;"
+      style="margin-top: 20px"
       (click)="startScan()"
     >
       Scan QR
     </ion-button>
-
   </div>
-
 </ion-content>
