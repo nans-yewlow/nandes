@@ -1,12 +1,12 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
+import { Component, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule, NavController, ToastController } from '@ionic/angular';
+import {
+  IonicModule,
+  NavController,
+  ToastController,
+  AlertController,
+  LoadingController,
+} from '@ionic/angular';
 import jsQR from 'jsqr';
 
 @Component({
@@ -23,12 +23,15 @@ export class QrisPage implements OnDestroy {
   canvasElement!: ElementRef<HTMLCanvasElement>;
 
   scanning: boolean = false;
+  cameraReady: boolean = false;
   stream: MediaStream | null = null;
   scanInterval: any;
 
   constructor(
     private navCtrl: NavController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController
   ) {}
 
   ngOnDestroy() {
@@ -44,6 +47,7 @@ export class QrisPage implements OnDestroy {
 
     console.log('Scanner dimulai...');
     this.scanning = true;
+    this.cameraReady = false;
 
     try {
       const constraints = {
@@ -61,8 +65,11 @@ export class QrisPage implements OnDestroy {
         if (this.videoElement && this.videoElement.nativeElement) {
           const video = this.videoElement.nativeElement;
           video.srcObject = this.stream;
-          video.play();
-          this.startScanningLoop();
+          video.onloadedmetadata = () => {
+            video.play();
+            this.cameraReady = true;
+            this.startScanningLoop();
+          };
         } else {
           console.error('Video element not found');
           this.showToast('Gagal memuat tampilan kamera');
@@ -77,6 +84,7 @@ export class QrisPage implements OnDestroy {
   }
 
   stopCamera() {
+    this.cameraReady = false;
     if (this.scanInterval) {
       clearInterval(this.scanInterval);
       this.scanInterval = null;
@@ -116,17 +124,79 @@ export class QrisPage implements OnDestroy {
 
       if (code) {
         console.log('Found QR code', code.data);
-        this.stopCamera();
-        // Here you would process the code.data
-        // For now, redirect as before
-        this.showToast(`QR Code Terdeteksi: ${code.data}`);
-
-        // Simulasi sukses seperti sebelumnya
-        setTimeout(() => {
-          this.navCtrl.navigateForward('/scan-success');
-        }, 1000);
+        this.handleQRCodeScanned(code.data);
       }
     }
+  }
+
+  async handleQRCodeScanned(data: string) {
+    this.stopCamera();
+
+    // Tampilkan modal input nominal
+    const alert = await this.alertCtrl.create({
+      header: 'Konfirmasi Pembayaran',
+      message: 'Masukkan nominal transfer yang ingin Anda bayarkan:',
+      inputs: [
+        {
+          name: 'amount',
+          type: 'number',
+          placeholder: 'Contoh: 50000',
+          min: 10000,
+        },
+      ],
+      buttons: [
+        {
+          text: 'Batal',
+          role: 'cancel',
+          handler: () => {
+            // User cancel, maybe restart scan?
+            // For now stay stopped
+            this.showToast('Pembayaran dibatalkan');
+          },
+        },
+        {
+          text: 'Bayar',
+          handler: (inputData) => {
+            const amount = parseInt(inputData.amount);
+            if (!amount || amount < 10000) {
+              this.showToast('Minimal transfer Rp 10.000');
+              return false; // keep alert open
+            }
+            this.processPayment(amount, data);
+            return true;
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  async processPayment(amount: number, qrData: string) {
+    const loading = await this.loadingCtrl.create({
+      message: 'Memproses pembayaran...',
+      spinner: 'crescent',
+    });
+    await loading.present();
+
+    // Simulasi delay proses
+    setTimeout(async () => {
+      await loading.dismiss();
+
+      const successAlert = await this.alertCtrl.create({
+        header: 'Berhasil!',
+        message: `Pembayaran sebesar Rp ${amount.toLocaleString()} berhasil.`,
+        buttons: [
+          {
+            text: 'OK',
+            handler: () => {
+              this.navCtrl.navigateRoot('/home');
+            },
+          },
+        ],
+      });
+      await successAlert.present();
+    }, 2000);
   }
 
   async showToast(msg: string) {

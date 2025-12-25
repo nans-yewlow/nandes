@@ -14,22 +14,38 @@
     <h2 class="qr-name" style="margin: 8px 0">BANK ARTHESA</h2>
     <p class="qr-account" style="margin: 0 0 10px">0822 9834 8383</p>
 
-    <!-- QR CODE DARI ASSETS & KAMERA -->
     <div class="qr-box" style="text-align: center; margin-top: 20px">
-      <!-- Gambar QR Static -->
+      <!-- QR code -->
       <img src="assets/img/qr.png" width="220" *ngIf="!scanning" />
 
-      <!-- Tampilan Kamera -->
-      <video
-        #video
-        autoplay
-        playsinline
-        style="width: 220px; height: 220px; object-fit: cover"
+      <!-- Scanner -->
+      <div
+        class="camera-wrapper"
+        style="
+          position: relative;
+          width: 220px;
+          height: 220px;
+          background: black;
+          border-radius: 12px;
+          overflow: hidden;
+        "
         *ngIf="scanning"
-      ></video>
+      >
+        <video
+          #video
+          autoplay
+          playsinline
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+          "
+          [style.opacity]="cameraReady ? '1' : '0'"
+        ></video>
 
-      <!-- Canvas Tersembunyi untuk Processing -->
-      <canvas #canvas hidden></canvas>
+        <canvas #canvas hidden></canvas>
+      </div>
     </div>
 
     <p class="qr-desc" style="font-size: 14px; color: #777; margin-top: 12px">
@@ -39,11 +55,11 @@
     <!-- TOMBOL SCAN QR -->
     <ion-button
       expand="block"
-      color="primary"
+      [color]="scanning ? 'warning' : 'primary'"
       style="margin-top: 20px"
       (click)="startScan()"
     >
-      Scan QR
+      {{ scanning ? 'Stop Scan' : 'Scan QR' }}
     </ion-button>
   </div>
 </ion-content>
