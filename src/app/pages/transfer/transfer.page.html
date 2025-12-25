@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Transfer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item>
+    <ion-label position="stacked">No. Rekening Tujuan</ion-label>
+    <ion-input [(ngModel)]="rekening"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Nominal</ion-label>
+    <ion-input type="number" [(ngModel)]="nominal"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" class="ion-margin-top" (click)="kirim()">
+    Kirim
+  </ion-button>
+
+</ion-content>

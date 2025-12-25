@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>QR PROFIL</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div class="qr-container" style="text-align:center; margin-top: 20px;">
+
+    <p class="qr-subtitle" style="font-size:14px; color:gray;">BANK ARTHESA</p>
+
+    <h2 class="qr-name" style="margin:8px 0;">BANK ARTHESA</h2>
+    <p class="qr-account" style="margin:0 0 10px;">0822 9834 8383</p>
+
+    <!-- QR CODE DARI ASSETS -->
+    <div class="qr-box" style="text-align:center; margin-top:20px;">
+      <img src="assets/img/qr.png" width="220" />
+    </div>
+
+    <p class="qr-desc" style="font-size:14px; color:#777; margin-top:12px;">
+      Ajak teman untuk scan kode QR ini
+    </p>
+
+    <!-- TOMBOL SCAN QR -->
+    <ion-button
+      expand="block"
+      color="primary"
+      style="margin-top:20px;"
+      (click)="startScan()"
+    >
+      Scan QR
+    </ion-button>
+
+  </div>
+
+</ion-content>

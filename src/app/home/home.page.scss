@@ -1,0 +1,44 @@
+.page-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 16px;
+}
+
+/* Card saldo biru seperti BRImo */
+.saldo-card {
+  background: linear-gradient(135deg, #1E3A8A, #2563EB);
+  color: white;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4);
+}
+
+.saldo-card .right-col {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+/* Card menu utama */
+.menu-card {
+  border-radius: 18px;
+  margin-top: 12px;
+}
+
+.menu-item {
+  text-align: center;
+}
+
+.menu-item p {
+  margin: 0;
+  font-size: 12px;
+}
+
+/* Biar list transaksi agak rapih */
+ion-item-divider {
+  margin-top: 16px;
+}
+
+ion-list {
+  background: transparent;
+}

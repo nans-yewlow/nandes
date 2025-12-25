@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>BANK ARTHESA</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="page-container">
+
+    <!-- CARD SALDO -->
+    <ion-card class="saldo-card">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <p class="saldo-subtitle">Saldo Rekening Utama</p>
+            <h2 class="saldo-amount">Rp 12.450.000</h2>
+            <p class="saldo-rekening">No. Rek: 1234 5678 9012</p>
+          </ion-col>
+
+          <ion-col size="4" class="right-col">
+            <ion-button fill="outline" color="light" size="small">
+              TAMPILKAN
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+    <!-- MENU UTAMA -->
+    <ion-card class="menu-card">
+      <ion-grid>
+        <ion-row class="ion-text-center">
+
+          <!-- TRANSFER -->
+          <ion-col size="3" class="menu-item">
+            <ion-button fill="clear" routerLink="/transfer">
+              <ion-icon name="arrow-redo-outline" size="large"></ion-icon>
+            </ion-button>
+            <p>Transfer</p>
+          </ion-col>
+
+          <!-- QRIS -->
+          <ion-col size="3" class="menu-item">
+            <ion-button fill="clear" routerLink="/qris">
+              <ion-icon name="qr-code-outline" size="large"></ion-icon>
+            </ion-button>
+            <p>QRIS</p>
+          </ion-col>
+
+          <!-- TOP UP -->
+          <ion-col size="3" class="menu-item">
+            <ion-button fill="clear" routerLink="/topup">
+              <ion-icon name="wallet-outline" size="large"></ion-icon>
+            </ion-button>
+            <p>Top Up</p>
+          </ion-col>
+
+          <!-- MUTASI -->
+          <ion-col size="3" class="menu-item">
+            <ion-button fill="clear" routerLink="/mutasi">
+              <ion-icon name="receipt-outline" size="large"></ion-icon>
+            </ion-button>
+            <p>Mutasi</p>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+    <!-- RIWAYAT TRANSAKSI -->
+    <ion-item-divider>
+      <ion-label>Riwayat Transaksi</ion-label>
+    </ion-item-divider>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <h3>Transfer ke Budi</h3>
+          <p>01 Des 2025 · BANK ARTHESA</p>
+        </ion-label>
+        <ion-text color="danger">- Rp 500.000</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          <h3>Top Up E-Wallet</h3>
+          <p>30 Nov 2025 · OVO</p>
+        </ion-label>
+        <ion-text color="danger">- Rp 150.000</ion-text>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          <h3>Gaji Masuk</h3>
+          <p>28 Nov 2025 · PT Sukses Selalu</p>
+        </ion-label>
+        <ion-text color="success">+ Rp 5.000.000</ion-text>
+      </ion-item>
+    </ion-list>
+
+  </div>
+</ion-content>

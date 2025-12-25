@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Top Up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <h2>Isi Saldo</h2>
+
+  <ion-item>
+    <ion-label position="floating">Nominal Top Up (Rp)</ion-label>
+    <ion-input type="number" [(ngModel)]="nominal"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Dari Bank</ion-label>
+    <ion-select [(ngModel)]="bank">
+      <ion-select-option value="BCA">BCA</ion-select-option>
+      <ion-select-option value="MANDIRI">MANDIRI</ion-select-option>
+      <ion-select-option value="BRI">BRI</ion-select-option>
+      <ion-select-option value="BNI">BNI</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="block" color="success" (click)="submitTopup()">
+    Top Up Sekarang
+  </ion-button>
+
+  <div *ngIf="message">
+    <ion-text color="success">
+      <p style="margin-top: 10px;">{{ message }}</p>
+    </ion-text>
+  </div>
+
+</ion-content>

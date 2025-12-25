@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Scan QR WebView</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-button expand="block" (click)="startScan()">
+    Mulai Scan
+  </ion-button>
+
+  <div style="margin-top:20px">
+    <video id="video" width="100%" autoplay></video>
+  </div>
+
+  <div *ngIf="scanResult" style="margin-top:15px; text-align:center">
+    <h2>Hasil Scan:</h2>
+    <p>{{ scanResult }}</p>
+
+    <ion-button color="danger" (click)="stopScan()">
+      Stop Scan
+    </ion-button>
+  </div>
+
+</ion-content>

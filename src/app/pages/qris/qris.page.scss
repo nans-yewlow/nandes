@@ -1,0 +1,43 @@
+.qr-container {
+  max-width: 420px;
+  margin: auto;
+  padding: 24px;
+  text-align: center;
+}
+
+.qr-subtitle {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #9ca3af;
+  margin-bottom: 8px;
+}
+
+.qr-name {
+  margin: 0;
+  font-weight: bold;
+}
+
+.qr-account {
+  margin-top: 4px;
+  color: #6b7280;
+}
+
+.qr-box {
+  margin: 24px auto;
+  padding: 16px;
+  background: white;
+  border-radius: 18px;
+  width: fit-content;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.qr-box img {
+  width: 220px;
+  height: 220px;
+}
+
+.qr-desc {
+  font-size: 13px;
+  color: #9ca3af;
+  line-height: 1.5;
+}
