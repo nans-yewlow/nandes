@@ -34,15 +34,35 @@
         <video
           #video
           autoplay
+          muted
           playsinline
           style="
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.5s ease;
           "
           [style.opacity]="cameraReady ? '1' : '0'"
         ></video>
+
+        <!-- Overlay Hitam -->
+        <div
+          *ngIf="!cameraReady"
+          style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <ion-spinner color="light"></ion-spinner>
+        </div>
 
         <canvas #canvas hidden></canvas>
       </div>
